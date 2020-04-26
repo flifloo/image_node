@@ -80,7 +80,8 @@ app.use(morgan("dev"))
 			fail = true;
 		}
 		res.render("login", {title: "login", fail: fail});
-	}).post("/login", (req, res) => {
+	})
+	.post("/login", (req, res) => {
 		if ("username" in req.body && "password" in req.body) {
 			file = JSON.parse(fs.readFileSync("users.json"));
 			if (req.body.username in file && passwordHash.verify(req.body.password, file[req.body.username])) {
@@ -92,6 +93,13 @@ app.use(morgan("dev"))
 			}
 		} else {
 			res.redirect("/login?fail");
+		}
+	})
+	.get("/images/:name", (req, res) => {
+		if ("name" in req.params && fs.existsSync("./images/"+req.params.name)) {
+			res.sendfile("./images/"+req.params.name);
+		} else {
+			res.status(404).send("Image not found :/");
 		}
 	})
 	.listen(8080);
