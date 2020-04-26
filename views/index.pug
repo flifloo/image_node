@@ -2,6 +2,6 @@ extend layout
 block content
 	h1 Image Node
 	form(method="POST", action="/upload", enctype="multipart/form-data")
-		input(type="file", name="image", accept="image/*")
+		input.file_button(type="file", name="image", accept="image/*")
 		button(type="submit") Upload
 

@@ -1,0 +1,51 @@
+body {
+	background-color: #8EC5FC;
+	background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+}
+
+h1 {
+	width: fit-content;
+	padding: 0.3em;
+	margin: auto auto 0.4em auto;
+	text-align: center;
+	border-bottom-width: 1px;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+}
+
+h2 {
+	text-align: center;
+}
+
+.fail {
+	color: red;
+}
+
+p {
+	text-align: center;
+}
+
+form {
+	background-color: #a7a4a459;
+	border-radius: 0.7em;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	flex-direction: column;
+	justify-content: center;
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	padding: 1em;
+}
+
+form>div {
+	margin: 0.3em;
+}
+
+.file_button::-webkit-file-upload-button, button {
+	border-radius: 0.3em;
+	border-width: 0em;
+	padding: 0.5em;
+}
+
