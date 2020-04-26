@@ -1,8 +1,7 @@
-doctype html
-html(lang="en")
-	head
-		meta(charset='utf-8')
-		title Image Node 
-	body
-		h1 Image Node	
+extend layout
+block content
+	h1 Image Node
+	form(method="POST", action="/upload", enctype="multipart/form-data")
+		input(type="file", name="image", accept="image/*")
+		button(type="submit") Upload
 
