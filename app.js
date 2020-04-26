@@ -103,5 +103,10 @@ app.use(morgan("dev"))
 		res.status(404);
 		res.render("404", {url: req.path});
 	})
+	.use((err, req, res, next) => {
+		console.error(err.stack);
+		res.status(500);
+		res.render("error");
+	})
 	.listen(8080);
 
