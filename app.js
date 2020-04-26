@@ -29,9 +29,9 @@ if (!fs.existsSync("users.json")) {
 app.use(morgan("dev"))
 	.use(express.static("public"))
 	.use(bodyParser.urlencoded({ extended: true }))
-	.use(cookieParser(process.env.SECRET))
+	.use(cookieParser(process.env.SECRET || "Keyboard cat"))
 	.use(session({
-		secret: process.env.SECRET,
+		secret: process.env.SECRET || "Keyboard cat",
 		resave: false,
 		saveUninitialized: false,
 		cookie: { secure: "auto" }
@@ -44,5 +44,5 @@ app.use(morgan("dev"))
 	.use("/images", imagesRoute)
 	.use(notFoundRoute)
 	.use(errorRoute)
-	.listen(8080);
+	.listen(process.env.PORT || 8080);
 
