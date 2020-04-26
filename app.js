@@ -5,8 +5,21 @@ let bodyParser = require('body-parser');
 let session = require("express-session");
 let fs = require("fs");
 let passwordHash = require('password-hash');
+let multer = require("multer");
+let crypto = require("crypto");
+let path = require("path");
 
 let app = express();
+let storage = multer.diskStorage({
+	destination: './images/',
+	filename: function (req, file, cb) {
+		crypto.pseudoRandomBytes(16, function (err, raw) {
+			if (err) return cb(err)
+			cb(null, raw.toString('hex') + path.extname(file.originalname))
+		})
+	}}
+);
+let upload = multer({storage: storage});
 
 if (!fs.existsSync("users.json")) {
 	fs.writeFileSync("users.json", "{}");
@@ -43,7 +56,7 @@ function isAuth(req, res, next) {
 app.use(morgan("dev"))
 	.use(express.static("public"))
 	.use(bodyParser.urlencoded({ extended: true }))
-	.use(cookieParser())
+	.use(cookieParser(process.env.SECRET))
 	.use(session({
 		secret: process.env.SECRET,
 		resave: false,
@@ -54,6 +67,12 @@ app.use(morgan("dev"))
 	.set("view engine", "pug")
 	.get("/", isAuth, (req, res) => {
 		res.render("index");
+	})
+	.post("/upload", isAuth, upload.single("image"), (req, res) => {
+		if (req.body.image) {
+			fs.writeFile("images/", data, options, callback)
+		}
+		res.redirect("/");
 	})
 	.get("/login", (req, res) => {
 		let fail = false;
