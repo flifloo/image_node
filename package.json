@@ -13,5 +13,10 @@
     "password-hash": "^1.2.2",
     "pug": "^2.0.4"
   },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/flifloo/image_node.git"
+  },
+  "license": "MIT",
   "author": "flifloo"
 }
