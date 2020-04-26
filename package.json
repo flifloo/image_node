@@ -1,0 +1,12 @@
+{
+  "name": "image_node",
+  "version": "0.1.0",
+  "description": "A light web image uploader",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pug": "^2.0.4"
+  },
+  "author": "flifloo"
+}
