@@ -92,12 +92,16 @@ app.use(morgan("dev"))
 			res.redirect("/login?fail");
 		}
 	})
-	.get("/images/:name", (req, res) => {
+	.get("/images/:name", (req, res, next) => {
 		if ("name" in req.params && fs.existsSync("./images/"+req.params.name)) {
 			res.sendfile("./images/"+req.params.name);
 		} else {
-			res.status(404).send("Image not found :/");
+			next();
 		}
+	})
+	.use((req, res) => {
+		res.status(404);
+		res.render("404", {url: req.path});
 	})
 	.listen(8080);
 
