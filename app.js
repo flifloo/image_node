@@ -69,10 +69,7 @@ app.use(morgan("dev"))
 		res.render("index");
 	})
 	.post("/upload", isAuth, upload.single("image"), (req, res) => {
-		if (req.body.image) {
-			fs.writeFile("images/", data, options, callback)
-		}
-		res.redirect("/");
+		res.redirect("/images/" + req.file.filename);
 	})
 	.get("/login", (req, res) => {
 		let fail = false;
