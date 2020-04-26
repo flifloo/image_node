@@ -13,10 +13,20 @@
     "password-hash": "^1.2.2",
     "pug": "^2.0.4"
   },
-  "repository": {
-      "type": "git",
-      "url": "https://github.com/flifloo/image_node.git"
+  "scripts": {
+    "start": "node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flifloo/image_node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flifloo/image_node/issues"
+  },
+  "homepage": "https://github.com/flifloo/image_node",
   "license": "MIT",
-  "author": "flifloo"
+  "author": {
+    "name": "flifloo",
+    "email": "flifloo@gmail.com"
+  }
 }
