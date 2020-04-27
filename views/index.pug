@@ -1,6 +1,8 @@
 extend layout
 block content
 	h1 Image Node
+	if invalidType
+		h2.fail Invalid image type !
 	form(method="POST", action="/upload", enctype="multipart/form-data")
 		input.file_button(type="file", name="image", accept="image/*")
 		button(type="submit") Upload

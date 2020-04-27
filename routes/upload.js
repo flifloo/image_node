@@ -13,11 +13,24 @@ let storage = multer.diskStorage({
 		});
 	}
 });
-let upload = multer({storage: storage});
+let upload = multer({
+	storage: storage,
+	fileFilter: (req, file, cb) => {
+		if (file.mimetype.substring(0, 6) !== "image/") {
+			req.fileErrorValidation = true;
+			return cb(null, false, new Error("Wrong file type"));
+		}
+		cb(null, true);
+	}
+});
 
 
 router.post("/", isAuth, upload.single("image"), (req, res) => {
-	res.redirect("/images/" + req.file.filename);
+	if (req.fileErrorValidation) {
+		res.redirect("/?invalidType");
+	} else {
+		res.redirect("/images/" + req.file.filename);
+	}
 });
 
 
