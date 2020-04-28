@@ -5,6 +5,7 @@ let bodyParser = require('body-parser');
 let session = require("express-session");
 let fs = require("fs");
 let addUser = require("./user").addUser;
+require("./cli");
 
 let indexRoute = require("./routes/index");
 let uploadRoute = require("./routes/upload");

@@ -1,18 +1,66 @@
+let readline = require("readline")
 let fs = require("fs");
 let passwordHash = require('password-hash');
 
 
-async function addUser() {
-	let rl = require("readline").createInterface({input: process.stdin, output: process.stdout, terminal: false});
+function getFile() {
+	if (fs.existsSync("users.json")) {
+		file = JSON.parse(fs.readFileSync("users.json"));
+	} else {
+		fs.writeFileSync("users.json", "{}");
+		file = {};
+	}
+	return file;
+}
+
+function getReadLine() {
+	return readline.createInterface({input: process.stdin, output: process.stdout, terminal: false});
+}
+
+async function getUsername() {
+	let rl = getReadLine();
 	let username;
-	let password;
-	file = JSON.parse(fs.readFileSync("users.json"));
-	do {
+	let file = getFile();
+	while (true) {
 		username = await new Promise(resolve => rl.question("Username: ", resolve));
-	} while (username in file || ["", null].indexOf(username) >= 0);
-	password = passwordHash.generate(await new Promise(resolve => rl.question("Password: ", resolve)));
+		if (username in file || ["", null].indexOf(username) >= 0)
+			console.error("Invalid username !")
+		else
+			break;
+	}
+	rl.close();
+	return username;
+}
+
+async function getPassword() {
+	let rl = getReadLine();
+	let password = await new Promise(resolve => rl.question("Password: ", resolve));
+	rl.close();
+	return passwordHash.generate(password);
+}
+
+function setUser(username, password) {
+	let file = getFile();
 	file[username] = password;
 	fs.writeFileSync("users.json", JSON.stringify(file));
+	console.log("User " + username + " created");
+}
+
+async function addUser() {
+	setUser(await getUsername(), await getPassword());
+}
+
+function delUser(username) {
+	let file = JSON.parse(fs.readFileSync("users.json"));
+	if (username in file) {
+		delete file[username];
+		fs.writeFileSync("users.json", JSON.stringify(file));
+		console.log("User " + username + " deleted");
+		return 0;
+	} else {
+		console.error("Username not found !");
+		return 1;
+	}
 }
 
 function isAuth(req, res, next) {
@@ -24,6 +72,13 @@ function isAuth(req, res, next) {
 }
 
 
-module.exports.addUser = addUser;
-module.exports.isAuth = isAuth;
+module.exports = {
+	getFile: getFile,
+	getUsername: getUsername,
+	getPassword: getPassword,
+	setUser: setUser,
+	addUser: addUser,
+	delUser: delUser,
+	isAuth: isAuth
+};
 
