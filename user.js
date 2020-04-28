@@ -36,14 +36,14 @@ async function getPassword() {
 	let rl = getReadLine();
 	let password = await new Promise(resolve => rl.question("Password: ", resolve));
 	rl.close();
-	return passwordHash.generate(password);
+	return password;
 }
 
 function setUser(username, password) {
 	let file = getFile();
-	file[username] = password;
+	file[username] = passwordHash.generate(password);
 	fs.writeFileSync("users.json", JSON.stringify(file));
-	console.log("User " + username + " created");
+	console.log("User " + username + " set");
 }
 
 async function addUser() {
