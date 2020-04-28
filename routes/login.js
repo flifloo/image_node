@@ -8,7 +8,11 @@ router.get("/", (req, res) => {
 	if ("fail" in req.query) {
 		fail = true;
 	}
-	res.render("login", {title: "login", fail: fail});
+	let path = null;
+	if ("path" in req.query) {
+		path = req.query.path;
+	}
+	res.render("login", {title: "login", fail: fail, path: path});
 });
 
 router.post("/", (req, res) => {
@@ -17,7 +21,11 @@ router.post("/", (req, res) => {
 		if (req.body.username in file && passwordHash.verify(req.body.password, file[req.body.username])) {
 			req.session.login = true;
 			req.session.save();
-			res.redirect("/");
+			if ("path" in req.query) {
+				res.redirect(req.query.path);
+			} else {
+				res.redirect("/");
+			}
 		} else {
 			res.redirect("/login?fail");
 		}

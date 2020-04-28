@@ -19,7 +19,7 @@ function isAuth(req, res, next) {
 	if (req.session.login) {
 		next();
 	} else {
-		res.redirect("/login");
+		res.redirect("/login?path=" + req.originalUrl);
 	}
 }
 

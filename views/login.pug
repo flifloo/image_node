@@ -1,9 +1,10 @@
 extend layout
 block content
+	- path = path ? "/login?path=" + path : "/login"
 	h1 Login
 	if fail
 		h2.fail Invalid loggin !
-	form(method="POST", action="/login")
+	form(method="POST", action=`${path}`)
 		div
 			label(for="username") Username: 
 			input#username(type="text", name="username")
