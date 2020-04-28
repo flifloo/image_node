@@ -10,6 +10,7 @@ let indexRoute = require("./routes/index");
 let uploadRoute = require("./routes/upload");
 let loginRoute = require("./routes/login");
 let imagesRoute = require("./routes/images");
+let listRoute = require("./routes/list");
 let removeRoute = require("./routes/remove");
 let notFoundRoute = require("./routes/notFound");
 let errorRoute = require("./routes/error");
@@ -43,6 +44,7 @@ app.use(morgan("dev"))
 	.use("/upload", uploadRoute)
 	.use("/login", loginRoute)
 	.use("/images", imagesRoute)
+	.use("/list", listRoute)
 	.use("/remove", removeRoute)
 	.use(notFoundRoute)
 	.use(errorRoute)

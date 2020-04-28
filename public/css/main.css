@@ -49,3 +49,19 @@ form>div {
 	padding: 0.5em;
 }
 
+.images {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.image {
+	margin: 2em;
+	max-width: 100%;
+	width: auto;
+	max-height: 20em;
+	height: auto;
+}
+
+
