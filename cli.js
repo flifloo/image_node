@@ -30,6 +30,14 @@ yargs.scriptName("node cli.js")
 	}, async (argv) => {
 		process.exit(user.delUser(argv.username));
 	})
+	.command("listuser", "List all users", (argv) => {
+		let users = [];
+		let file = user.getFile();
+		for (let u in file)
+			users.push(u);
+		console.log("Users: " + users.join(", "));
+		process.exit(0);
+	})
 	.help()
 	.alias("h", "help")
 	.argv;

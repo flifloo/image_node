@@ -24,7 +24,7 @@ async function getUsername() {
 	while (true) {
 		username = await new Promise(resolve => rl.question("Username: ", resolve));
 		if (username in file || ["", null].indexOf(username) >= 0)
-			console.error("Invalid username !")
+			console.error("Invalid username !");
 		else
 			break;
 	}
