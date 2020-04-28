@@ -10,6 +10,7 @@ require("./cli");
 let indexRoute = require("./routes/index");
 let uploadRoute = require("./routes/upload");
 let loginRoute = require("./routes/login");
+let logoutRoute = require("./routes/logout");
 let imagesRoute = require("./routes/images");
 let listRoute = require("./routes/list");
 let removeRoute = require("./routes/remove");
@@ -44,6 +45,7 @@ app.use(morgan("dev"))
 	.use("/", indexRoute)
 	.use("/upload", uploadRoute)
 	.use("/login", loginRoute)
+	.use("/logout", logoutRoute)
 	.use("/images", imagesRoute)
 	.use("/list", listRoute)
 	.use("/remove", removeRoute)

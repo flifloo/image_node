@@ -4,15 +4,19 @@ let passwordHash = require('password-hash');
 
 
 router.get("/", (req, res) => {
-	let fail = false;
-	if ("fail" in req.query) {
-		fail = true;
+	if (req.session.login) {
+		res.redirect("/");
+	} else {
+		let fail = false;
+		if ("fail" in req.query) {
+			fail = true;
+		}
+		let path = null;
+		if ("path" in req.query) {
+			path = req.query.path;
+		}
+		res.render("login", {title: "login", fail: fail, path: path});
 	}
-	let path = null;
-	if ("path" in req.query) {
-		path = req.query.path;
-	}
-	res.render("login", {title: "login", fail: fail, path: path});
 });
 
 router.post("/", (req, res) => {
