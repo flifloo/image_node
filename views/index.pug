@@ -6,4 +6,7 @@ block content
 	form(method="POST", action="/upload", enctype="multipart/form-data")
 		input.file_button(type="file", name="image", accept="image/*")
 		button(type="submit") Upload
+	div.buttons
+		a.button(href="/list") Image List
+	p Actually #{count} images uploaded !
 
