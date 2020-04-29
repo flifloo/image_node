@@ -7,7 +7,7 @@ router.get("/", isAuth, (req, res) => {
 	if ("invalidType" in req.query) {
 		invalidType = true;
 	}
-	res.render("index", {invalidType: invalidType});
+	res.render("index", {invalidType: invalidType, session: req.session});
 });
 
 

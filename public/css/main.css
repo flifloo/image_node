@@ -43,7 +43,7 @@ form>div {
 	margin: 0.3em;
 }
 
-.file_button::-webkit-file-upload-button, button {
+.file_button::-webkit-file-upload-button, button, .login, .logout {
 	border-radius: 0.3em;
 	border-width: 0em;
 	padding: 0.5em;
@@ -64,4 +64,25 @@ form>div {
 	height: auto;
 }
 
+
+header {
+	display: flex;
+	position: absolute;
+	right: 0;
+	margin: 0.5em;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.hy {
+	margin-right: 1em;
+}
+
+.login, .logout {
+	background-color: buttonface;
+	text-decoration: none;
+	color: initial;
+	width: fit-content;
+	height: fit-content;
+}
 

@@ -8,5 +8,11 @@ html(lang="en")
 			title Image Node
 		link(rel="stylesheet", href="/css/main.css")
 	body
+		header
+			if session.login
+				p.hy Hy #{session.username} !
+				a.logout(href="/logout") Logout
+			else
+				a.login(href="/login") Login
 		block content
 

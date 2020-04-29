@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 		if ("path" in req.query) {
 			path = req.query.path;
 		}
-		res.render("login", {title: "login", fail: fail, path: path});
+		res.render("login", {title: "login", fail: fail, path: path, session: req.session});
 	}
 });
 
@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
 		file = JSON.parse(fs.readFileSync("users.json"));
 		if (req.body.username in file && passwordHash.verify(req.body.password, file[req.body.username])) {
 			req.session.login = true;
+			req.session.username = req.body.username;
 			req.session.save();
 			if ("path" in req.query) {
 				res.redirect(req.query.path);

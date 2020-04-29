@@ -5,7 +5,7 @@ let fs = require("fs");
 
 router.get("/", isAuth, (req, res, next) => {
 	let images = fs.readdirSync("./images/");
-	res.render("list", {images: images});
+	res.render("list", {images: images, session: req.session});
 });
 
 
