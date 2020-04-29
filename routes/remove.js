@@ -6,7 +6,7 @@ let fs = require("fs");
 router.get("/:name", isAuth, (req, res, next) => {
 	if ("name" in req.params && fs.existsSync("./images/"+req.params.name)) {
 		fs.unlinkSync("./images/"+req.params.name);
-		res.redirect("/");
+		res.redirect("/list");
 	} else {
 		next();
 	}

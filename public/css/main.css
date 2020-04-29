@@ -94,3 +94,15 @@ header {
 	justify-content: center;
 }
 
+.image_box {
+	position: relative;
+}
+
+.remove {
+	position: absolute;
+	top: 0.2em;
+	right: 0.2em;
+	text-decoration: none;
+	color: initial;
+}
+

@@ -3,5 +3,7 @@ block content
 	h1 Images List
 	div.images
 		each image in images
-			img.image(src=`/images/${image}`)
+			div.image_box
+				a.remove(href=`/remove/${image}`) X
+				img.image(src=`/images/${image}`)
 
